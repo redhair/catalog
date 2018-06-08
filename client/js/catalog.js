@@ -4,8 +4,9 @@ var Catalog = ((d) => {
 	var _init = false;
 	var state = {};
 
+	var $pathname = window.location.pathname; //'wayne-valley-high-school-football';
 	var $api = 'http://206.189.176.175/api';
-	var $catalogResource = $api + '/organizations/wayne-valley-high-school-football/all';
+	var $catalogResource = $api + '/organizations' + $pathname + '/all';
 	var $productResource = $api + '/product';
 	var $pdp_container = d.getElementById('pdp_container');
 	var $checkout_container = d.getElementById('checkout_container');
@@ -363,6 +364,7 @@ var Catalog = ((d) => {
 				_init = true;
 			}).catch((e) => {
 				console.log('Catalog Error:', e);
+				//show 404 here
 			});
 	}
 
