@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/flexboxgrid.css" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/spinner.css" />
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+</head>
+<body>
+  <header class="row center-xs middle-xs between-xs mainHeading">
+    <div class="headerImageWrapper col-xs-3">
+      <img id="headerImage" width="60">
+    </div>
+    <input class="searchBar col-xs-6 col-sm-4" placeholder="search">
+    <div class="col-xs-2 col-sm-3">
+      <i id="cart_icon" class="fa fa-lg fa-shopping-cart noselect clickable cart--icon">
+        <span id="cart_amount" class="amountBadge noselect clickable"></span>
+      </i>
+    </div>
+    <div id="cart" class="cart noselect" style="visibility: hidden;"></div>
+  </header>
+  
+  <div id="catalog_container" style="margin-top: 85px;">
+    <div id="filters" class="filters col-xs-12">
+      <div class="filtersToggle col-xs-4 col-xs-offset-1">
+        Filters
+        <i class="fa fa-chevron-down pull-right" style="margin-top: 0.35rem;"></i>
+      </div>
+    </div>
+    <div id="filter_content" class="col-xs-10 col-xs-offset-1 filtersContent"></div>
+    <div id="catalog" class="col-xs-12 catalog"></div>
+  </div>
+
+  <div id="pdp_container" class="pdpContainer"></div>
+  <div id="order_container" class="orderContainer"></div>
+  <div id="checkout_container" class="checkoutContainer">
+    <div class="col-xs-12">
+      <a onclick="Catalog.openCatalog()"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <div class="row center-xs">
+      <h2 style="margin: 0;" class="col-xs-12 col-sm-8">Shipping Information</h2>
+      <form id="shipping_info" action="javascript:void(0);" onsubmit="Cart.checkoutButtonOnClick()" class="shippingInfoContainer col-xs-12 col-sm-8" style="margin:30px 0;">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+              <label for="first">First</label>
+              <input autocomplete="given-name" type="text" id="first" required>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <label for="last">Last</label>
+              <input autocomplete="family-name" type="text" id="last" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-10">
+              <label for="line1">Address</label>
+              <input autocomplete="address-line1" type="text" id="line1" required>
+            </div>
+            <div class="col-xs-12 col-sm-2">
+              <label for="line2">Apt.</label>
+              <input autocomplete="address-line2" type="text" id="line2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <label for="city">City</label>
+              <input autocomplete="address-level2" type="text" id="city" required>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+              <label for="state">State</label>
+              <input autocomplete="address-level1" type="text" id="state" required>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+              <label for="zip">Zip Code</label>
+              <input autocomplete="postal-code" type="number" id="zip" required>
+          </div>
+        </div>
+        <div class="row center-xs">
+          <button class="btn btn--checkout col-xs-12 col-sm-4" type="submit" style="margin-top: 30px;">Place Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer id="footer" class="footer"></footer>
+
+  <div id="loading">
+    <div class="sk-circle">
+      <div class="sk-circle1 sk-child"></div>
+      <div class="sk-circle2 sk-child"></div>
+      <div class="sk-circle3 sk-child"></div>
+      <div class="sk-circle4 sk-child"></div>
+      <div class="sk-circle5 sk-child"></div>
+      <div class="sk-circle6 sk-child"></div>
+      <div class="sk-circle7 sk-child"></div>
+      <div class="sk-circle8 sk-child"></div>
+      <div class="sk-circle9 sk-child"></div>
+      <div class="sk-circle10 sk-child"></div>
+      <div class="sk-circle11 sk-child"></div>
+      <div class="sk-circle12 sk-child"></div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

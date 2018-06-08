@@ -1,0 +1,65 @@
+html    {   font: 100%/1.5 "Open Sans", sans-serif;       }
+
+body,
+input,
+button {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1      { font-size: 2em;       /* 2*16 = 32 */         }
+h2      { font-size: 1.5em;     /* 1.5*16 = 24 */       }
+h3      { font-size: 1.17em;    /* 1.17*16 = 18.72 */   }
+h4      { font-size: 1em;       /* 1*16 = 16 */         }
+h5      { font-size: 0.83em;    /* 0.83*16 = 13.28 */   }
+h6      { font-size: 0.75em;    /* 0.75*16 = 12 */      }
+
+p { line-height: 1.5;
+    margin: 0 0 1em;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;          }
+
+a,
+a:visited   {   text-decoration: underline; }
+a:hover     {   text-decoration: none; }
+a:active    {   color: tomato;      }
+a:focus     {   border: 1px dotted tomato; }
+a[href$=".zip"] { color: tomato; }
+
+strong  {   font-weight: bold;  }
+em      {   font-style: italic; }
+
+code,
+pre     {   font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+            font-size: 1em; }
+
+blockquote {
+ font-style: italic;
+}
+
+blockquote:before {
+ content: "\201C";
+ display: inline-block;
+ padding-right: .4em;
+}
+
+@media print {
+
+    * { background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;}
+
+    p,
+    h2,
+    h3 {orphans: 3; /* http://css-tricks.com/almanac/properties/o/orphans/ */
+        widows: 3;  /* http://css-tricks.com/almanac/properties/w/widows/ */}
+
+    h2,
+    h3 {page-break-after: avoid;                        }
+
+}
