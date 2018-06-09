@@ -67,6 +67,7 @@ a:active {
 .mainHeading {
 	position: fixed;
 	top: 0;
+	min-height: 85px;
 	margin: 0;
 	z-index: 5;
 	width: 100%;
