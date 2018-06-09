@@ -5,7 +5,7 @@ var Catalog = ((d) => {
 	var state = {};
 
 	var $pathname = window.location.pathname; //'wayne-valley-high-school-football';
-	var $api = 'http://206.189.176.175/api';
+	var $api = 'http://dashboard.foresightiot.com/api';
 	var $catalogResource = $api + '/organizations' + $pathname + '/all';
 	var $productResource = $api + '/product';
 	var $pdp_container = d.getElementById('pdp_container');

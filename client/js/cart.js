@@ -8,7 +8,7 @@ var Cart = ((d) => {
 
 	var $cart_container = d.getElementById('cart');
 	var $subtotal_container;
-	var $url = 'http://206.189.176.175/api';
+	var $url = 'http://dashboard.foresightiot.com/api';
 
 	var checkoutHandler = StripeCheckout.configure({
 		key: 'pk_test_KoQLyeaSgGf2jK1x39LMVysX', //stripe pk_test_key,
