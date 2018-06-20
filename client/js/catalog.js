@@ -5,7 +5,7 @@ var Catalog = ((d) => {
 	var state = {};
 
 	var $pathname = "wayne-valley-football"//window.location.pathname;
-	var $api = 'dashboard.allcountyapparel.com/api';
+	var $api = 'http://dashboard.allcountyapparel.com/api';
 	var $catalogResource = $api + '/organizations' + $pathname + '/all';
 	var $productResource = $api + '/product';
 	var $pdp_container = d.getElementById('pdp_container');
