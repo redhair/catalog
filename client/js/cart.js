@@ -8,10 +8,10 @@ var Cart = ((d) => {
 
 	var $cart_container = d.getElementById('cart');
 	var $subtotal_container;
-	var $url = 'http://dashboard.foresightiot.com/api';
+	var $url = 'http://dashboard.allcountyapparel.com/api'; //'http://dashboard.foresightiot.com/api';
 
 	var checkoutHandler = StripeCheckout.configure({
-		key: 'pk_test_KoQLyeaSgGf2jK1x39LMVysX', //stripe pk_test_key,
+		key: 'pk_live_8FYfP4advw9MVMoZS11VR5xL', //stripe pk_test_key,
 		image: '',
 		locale: 'auto'
 	});
@@ -19,7 +19,7 @@ var Cart = ((d) => {
 	function checkoutButtonOnClick() {
 		checkoutHandler.open({
 			name: Catalog.state.organization.organization_name.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-			description: "test", //put name of product here or cart details
+			description: '', //put name of product here or cart details
 			token: handleToken
 		});
 	};
@@ -89,7 +89,7 @@ var Cart = ((d) => {
 		if (customization.children.length > 0) {
 			for (var n = 0; n < customization.children.length; n++) {
 				var option = customization.children[n];
-				var label = option.children[0].textContent;
+				var label = option.children[0].children[0].textContent.trim();
 				var value = option.children[1].value;
 
 				if (value) {
@@ -105,28 +105,39 @@ var Cart = ((d) => {
 	}
 
 	function add(product) {
+		var prodCopy = JSON.parse(JSON.stringify(product));
 		var variant = d.getElementById('variant').value;
 		var size = d.getElementById('size').value;
 		var customization = getCustomizationFromPage();
 
 		for (var i = 0; i < state.products.length; i++) {
 			var curr = state.products[i];
-			if (curr.details.product_id === product.product_id
+			console.log(areObjectArraysEqual(curr.customization, customization))
+			if (curr.details.product_id === prodCopy.product_id
 			&&  curr.variant === variant
 			&&  curr.size === size
 			&&  areObjectArraysEqual(curr.customization, customization)) {
 				curr.quantity++;
 				setProducts();
 				renderCart();
-				if ($cart_container.style.visibility === "hidden") {
+				if ($cart_container.style.visibility === 'hidden') {
 					showCart();
 				}
+
 				return;
 			}
 		}
 
+		if (customization.length > 0 && !prodCopy.priceChange) {
+			for (var i = 0; i < customization.length; i++) {
+				prodCopy.price += parseInt(prodCopy.custom_fields[i].price);
+				prodCopy.priceChange = true;
+				console.log(prodCopy.price)
+			}
+		}
+
 		state.products.push({
-			'details': product,
+			'details': prodCopy,
 			'quantity': 1,
 			'size': size,
 			'variant': variant,
@@ -136,7 +147,7 @@ var Cart = ((d) => {
 		setProducts();
 		renderCart();
 
-		if ($cart_container.style.visibility === "hidden") {
+		if ($cart_container.style.visibility === 'hidden') {
 			showCart();
 		}
 	}
@@ -153,11 +164,16 @@ var Cart = ((d) => {
 	  if (a == null || b == null) return false;
 	  if (a.length != b.length) return false;
 
-	  a = Object.getOwnPropertyNames(a).sort();
-	  b = Object.getOwnPropertyNames(b).sort();
+	  var as = JSON.stringify({a: a});
+	  var bs = JSON.stringify({a: b});
+
+	  if (as !== bs) return false;
+
+	  var ap = Object.getOwnPropertyNames(a).sort();
+	  var bp = Object.getOwnPropertyNames(b).sort();
 
 	  for (var i = 0; i < a.length; i++) {
-	    if (a[i] !== b[i]) return false;
+	    if (ap[i] !== bp[i]) return false;
 	  }
 
 	  return true;
@@ -194,6 +210,7 @@ var Cart = ((d) => {
 		cartItemContainer.className = 'cartItemContainer';
 		for (var p in state.products) {
 			var product = state.products[p];
+			console.log(product)
 			var item = d.createElement('div');
 			item.className = 'cartItem col-xs row';
 			var itemTemplate = `
@@ -241,7 +258,7 @@ var Cart = ((d) => {
 
 	function getTotal() {
 		//todo, don't recalculate it each time, read it, then add to it
-		return state.products.map(p => p.details.price * p.quantity).reduce((a, b) => a + b, 0);
+		return state.products.map(p => p.details.price * p.quantity).reduce((a, b) => a + b, 0).toFixed(2);
 	}
 
 	function getQuantityOfCart() {

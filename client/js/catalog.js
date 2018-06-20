@@ -4,8 +4,8 @@ var Catalog = ((d) => {
 	var _init = false;
 	var state = {};
 
-	var $pathname = window.location.pathname; //'wayne-valley-high-school-football';
-	var $api = 'http://dashboard.foresightiot.com/api';
+	var $pathname = "wayne-valley-football"//window.location.pathname;
+	var $api = 'dashboard.allcountyapparel.com/api';
 	var $catalogResource = $api + '/organizations' + $pathname + '/all';
 	var $productResource = $api + '/product';
 	var $pdp_container = d.getElementById('pdp_container');
@@ -47,11 +47,14 @@ var Catalog = ((d) => {
 		paintCatalog();
 	}
 
-	function openDetails(product_id) {		
+	function openDetails(product_id) {
+		//fetch('http://dashboard.allcountyapparel.com/api/product/' + product_id).then((res) => {
 		fetch($productResource + '/' + product_id).then((res) => {
+			console.log(res)
 		    return res.json();
 		}).then((product) => {
 			state.product = product[0];
+			console.log(state.product);
 			state.product.colors = JSON.parse(state.product.colors);
 			state.product.sizes = JSON.parse(state.product.sizes);
 			state.product.custom_fields = JSON.parse(state.product.custom_fields);
@@ -77,7 +80,7 @@ var Catalog = ((d) => {
 				    <p id="description" class="description">${state.product.description}</p>
 				    <div>
 				    	<select id="variant" onchange="Catalog.changeActiveVariant(this.value)">
-				    	${product[0].colors.map((color, i) => `
+				    	${state.product.colors.map((color, i) => `
 						    <option value="${color.label}"><div style="width:10px;height:10px;background:${color.value};"></div>${color.label}</option>
 						  `.trim()).join('')}
 				    	</select>
@@ -92,8 +95,11 @@ var Catalog = ((d) => {
 				    <div id="customization" style="display:flex;flex-direction:column;">
 				    	${state.product.custom_fields.map((field, i) => `
 				    		<div class="customizationField">
-						    	<span style="text-transform:none;margin-right:10px;">${field.label}:</span>
-						    	<input type=${field.type}>
+				    			<div style="display:flex;flex-direction:row;justify-content:space-between;margin:0 25px;">
+				    				<span style="text-transform:none;margin-right:10px;">${field.label}:</span>
+				    				<span style="text-transform:none;margin-right10px;">+$${field.price}</span>
+						    	</div>
+						    	<input placeholder="${field.label}" type=${field.type} style="width:auto;margin:0 20px;padding: 10px;max-height: 40px;font-size: 18px;border-radius: 5px;">
 						    </div>
 						`.trim()).join('')}
 				    </div>
@@ -117,7 +123,7 @@ var Catalog = ((d) => {
 	}
 
 	function scrollToTop() {
-		window.scrollTo(0,0);
+		window.scrollTo(0, 0);
 	}
 
 	function openCheckout() {
@@ -260,27 +266,27 @@ var Catalog = ((d) => {
 			if (product.images.length > 0) {
 				var template =
 					`<a onclick="Catalog.openDetails('${product.product_id}')">
-						<div class="row end-xs productPrice">
-							$${product.price}
-						</div>
 						<div class="productImage">
 							<img src="${product.images[0].image_url}">
 						</div>
-						<div class="productName">
+						<div class="row center-xs productName">
 							${product.product_name}
+						</div>
+						<div class="row center-xs productPrice">
+							$${product.price}
 						</div>
 					</a>`;
 			} else {
 				var template =
 					`<a onclick="Catalog.openDetails('${product.product_id}')">
-						<div class="row end-xs productPrice">
-							$${product.price}
-						</div>
 						<div class="productImage">
 							<img src="http://via.placeholder.com/350x350">
 						</div>
-						<div class="productName">
+						<div class="row center-xs productName">
 							${product.product_name}
+						</div>
+						<div class="row center-xs productPrice">
+							$${product.price}
 						</div>
 					</a>`;
 			}
@@ -344,8 +350,10 @@ var Catalog = ((d) => {
 		if (_init)
 			return;
 
+		//fetch("http://dashboard.allcountyapparel.com/api/organizations/wayne-valley-football/all")
 		fetch($catalogResource)
 			.then((response) => {
+				console.log(response)
 				if (!response.ok) {
 					console.log("Catalog Error")
 		            throw Error(response.statusText);

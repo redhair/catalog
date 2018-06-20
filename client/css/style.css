@@ -162,9 +162,20 @@ a:active {
 	text-transform: none;
 }
 
+.customizationField { 
+	width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
 .customizationField input {
 	border: 1px solid black;
 	padding: 5px 0;
+}
+
+.customizationField input::placeholder {
+	font-size: 18px;
 }
 
 .searchBar {
@@ -336,6 +347,7 @@ a:active {
 	outline: 0;
 	color: black;
 	border: 0;
+	cursor: pointer;
 }
 
 .productDetailsContainer {
@@ -343,11 +355,10 @@ a:active {
 }
 
 .productPrice {
-	height: 10%;
+	height: 5%;
 	font-size: 0.85em;
 	display: flex;
 	align-items: center;
-	margin-right: 1rem;
 }
 
 .productImage {
@@ -355,13 +366,14 @@ a:active {
 	justify-content: center;
 	cursor: pointer;
 	width: 100%;
+	margin-top: 2.5rem;
 	/*max-width: 100vw;*/
 }
 
 .productName {
 	text-transform: capitalize;
 	display: flex;
-	height: 20%;
+	height: 10%;
 	width: 75%;
 	margin: auto;
 	justify-content: center;
