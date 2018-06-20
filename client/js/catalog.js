@@ -4,7 +4,7 @@ var Catalog = ((d) => {
 	var _init = false;
 	var state = {};
 
-	var $pathname = "wayne-valley-football"//window.location.pathname;
+	var $pathname = window.location.pathname;
 	var $api = 'http://dashboard.allcountyapparel.com/api';
 	var $catalogResource = $api + '/organizations' + $pathname + '/all';
 	var $productResource = $api + '/product';
@@ -50,11 +50,9 @@ var Catalog = ((d) => {
 	function openDetails(product_id) {
 		//fetch('http://dashboard.allcountyapparel.com/api/product/' + product_id).then((res) => {
 		fetch($productResource + '/' + product_id).then((res) => {
-			console.log(res)
 		    return res.json();
 		}).then((product) => {
 			state.product = product[0];
-			console.log(state.product);
 			state.product.colors = JSON.parse(state.product.colors);
 			state.product.sizes = JSON.parse(state.product.sizes);
 			state.product.custom_fields = JSON.parse(state.product.custom_fields);
@@ -353,7 +351,6 @@ var Catalog = ((d) => {
 		//fetch("http://dashboard.allcountyapparel.com/api/organizations/wayne-valley-football/all")
 		fetch($catalogResource)
 			.then((response) => {
-				console.log(response)
 				if (!response.ok) {
 					console.log("Catalog Error")
 		            throw Error(response.statusText);

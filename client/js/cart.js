@@ -8,10 +8,10 @@ var Cart = ((d) => {
 
 	var $cart_container = d.getElementById('cart');
 	var $subtotal_container;
-	var $url = 'http://dashboard.allcountyapparel.com/api'; //'http://dashboard.foresightiot.com/api';
+	var $url = 'http://dashboard.allcountyapparel.com/api';
 
 	var checkoutHandler = StripeCheckout.configure({
-		key: 'pk_live_8FYfP4advw9MVMoZS11VR5xL', //stripe pk_test_key,
+		key: 'pk_live_8FYfP4advw9MVMoZS11VR5xL',
 		image: '',
 		locale: 'auto'
 	});
@@ -112,7 +112,6 @@ var Cart = ((d) => {
 
 		for (var i = 0; i < state.products.length; i++) {
 			var curr = state.products[i];
-			console.log(areObjectArraysEqual(curr.customization, customization))
 			if (curr.details.product_id === prodCopy.product_id
 			&&  curr.variant === variant
 			&&  curr.size === size
@@ -132,7 +131,6 @@ var Cart = ((d) => {
 			for (var i = 0; i < customization.length; i++) {
 				prodCopy.price += parseInt(prodCopy.custom_fields[i].price);
 				prodCopy.priceChange = true;
-				console.log(prodCopy.price)
 			}
 		}
 
@@ -210,7 +208,6 @@ var Cart = ((d) => {
 		cartItemContainer.className = 'cartItemContainer';
 		for (var p in state.products) {
 			var product = state.products[p];
-			console.log(product)
 			var item = d.createElement('div');
 			item.className = 'cartItem col-xs row';
 			var itemTemplate = `
