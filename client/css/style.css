@@ -160,6 +160,9 @@ a:active {
 .description {
 	white-space: pre-wrap;
 	text-transform: none;
+	text-align: left;
+    width: 80%;
+    margin: 20px auto;
 }
 
 .customizationField { 
@@ -280,6 +283,7 @@ a:active {
 
 .cartItem__info h4 {
 	margin: 0;
+	max-width: 130px;
 }
 
 .orderItem {

@@ -134,6 +134,14 @@ var Cart = ((d) => {
 			}
 		}
 
+
+		for (var i = 0; i < product.sizes.length; i++) {
+			if (product.sizes[i].price
+			&&  size === product.sizes[i].label) {
+				prodCopy.price += parseInt(product.sizes[i].price);
+			}
+		}
+
 		state.products.push({
 			'details': prodCopy,
 			'quantity': 1,

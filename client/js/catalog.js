@@ -86,7 +86,7 @@ var Catalog = ((d) => {
 				    <div>
 				    	<select id="size">
 				    	${state.product.sizes.map((size, i) => `
-						    <option value="${size.label}">${size.label}</option>
+						    <option value="${size.label}">${size.label}${size.price !== undefined ? `&nbsp;+$${size.price}` : ''}</option>
 						  `.trim()).join('')}
 					    </select>
 				    </div>
@@ -348,15 +348,20 @@ var Catalog = ((d) => {
 		if (_init)
 			return;
 
-		//fetch("http://dashboard.allcountyapparel.com/api/organizations/wayne-valley-football/all")
-		fetch($catalogResource)
+		fetch("http://dashboard.allcountyapparel.com/api/organizations/wayne-valley-football/all")
+		//fetch($catalogResource)
 			.then((response) => {
 				if (!response.ok) {
-					console.log("Catalog Error")
 		            throw Error(response.statusText);
 		        }
 
-			    return response.json();
+		        var contentType = response.headers.get('content-type');
+		        var isJSON = contentType.indexOf('application/json') !== -1;
+		        if (contentType && isJSON) {
+		        	return response.json();
+		        } else {
+		        	throw Error('Catalog fetch failed. Response body is not of type JSON.');
+		        }
 			}).then((info) => {
 				state.products = info[0];
 				state.categories = info[1];
