@@ -86,7 +86,7 @@ var Catalog = ((d) => {
 				    <div>
 				    	<select id="size">
 				    	${state.product.sizes.map((size, i) => `
-						    <option value="${size.label}">${size.label}${size.price !== undefined ? `&nbsp;+$${size.price}` : ''}</option>
+						    <option value="${size.label}">${size.label}${size.price !== undefined && size.price !== '' ? `&nbsp;+$${size.price}` : ``}</option>
 						  `.trim()).join('')}
 					    </select>
 				    </div>
@@ -95,7 +95,7 @@ var Catalog = ((d) => {
 				    		<div class="customizationField">
 				    			<div style="display:flex;flex-direction:row;justify-content:space-between;margin:0 25px;">
 				    				<span style="text-transform:none;margin-right:10px;">${field.label}:</span>
-				    				<span style="text-transform:none;margin-right10px;">+$${field.price}</span>
+				    				<span style="text-transform:none;margin-right10px;">${field.price !== undefined && field.price !== '' ? `+$${field.price}` : ``}</span>
 						    	</div>
 						    	<input placeholder="${field.label}" type=${field.type} style="width:auto;margin:0 20px;padding: 10px;max-height: 40px;font-size: 18px;border-radius: 5px;">
 						    </div>
