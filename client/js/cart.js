@@ -129,8 +129,10 @@ var Cart = ((d) => {
 
 		if (customization.length > 0 && !prodCopy.priceChange) {
 			for (var i = 0; i < customization.length; i++) {
-				prodCopy.price += parseInt(prodCopy.custom_fields[i].price);
-				prodCopy.priceChange = true;
+				if (prodCopy.custom_fields[i].price) {
+					prodCopy.price += parseInt(prodCopy.custom_fields[i].price);
+					prodCopy.priceChange = true;
+				}
 			}
 		}
 

@@ -66,20 +66,20 @@ var Catalog = ((d) => {
 				  </div>
 				</div>
 				<div id="details" class="productDetailsContainer row center-xs">
-				  <div class="col-xs-12 col-sm-8 row">
+				  <div class="col-xs-12 col-sm-7 row">
 				  	<div id="thumbnail_container" class="col-xs-12 col-lg-2 thumbnailContainer"></div>
 				  	<div class="col-xs-12 col-lg-10 first-xs last-lg">
 				    	<img id="main_image" class="details__img" src="${state.product.images[0].image_url}">
 				    </div>
 				  </div>
-				  <div class="col-xs-12 col-sm-4">
+				  <div class="col-xs-12 col-sm-5">
 				    <h1 id="name" style="margin-top:0;">${state.product.product_name}</h1>
 				    <h4 id="price">$${state.product.price}</h4>
 				    <p id="description" class="description">${state.product.description}</p>
 				    <div>
 				    	<select id="variant" onchange="Catalog.changeActiveVariant(this.value)">
 				    	${state.product.colors.map((color, i) => `
-						    <option value="${color.label}"><div style="width:10px;height:10px;background:${color.value};"></div>${color.label}</option>
+						    <option value="${color.label}">${color.label}</option>
 						  `.trim()).join('')}
 				    	</select>
 				    </div>
