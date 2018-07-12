@@ -93,11 +93,22 @@ var Catalog = ((d) => {
 				    <div id="customization" style="display:flex;flex-direction:column;">
 				    	${state.product.custom_fields.map((field, i) => `
 				    		<div class="customizationField">
-				    			<div style="display:flex;flex-direction:row;justify-content:space-between;margin:0 25px;">
+				    			${field.type === "checkbox" 
+				    			? ` 
+				    			<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;margin:0 auto; width: 90%;">
+				    				<input class="customizationField__input" placeholder="${field.label}" type=${field.type} style="width:auto;margin:0;padding: 10px;max-height: 40px;font-size: 18px;border-radius: 5px;">
+				    				<div>
+				    					<span style="text-transform:none;margin-right:10px;">${field.label}:</span>
+				    					<span style="text-transform:none;margin-right10px;">${field.price !== undefined && field.price !== '' ? `+$${field.price}` : ``}</span>
+				    				</div>
+						    	</div>
+						    	` : ` 
+						    	<div style="display:flex;flex-direction:row;justify-content:space-between;width:90%;margin: 0 auto;">
 				    				<span style="text-transform:none;margin-right:10px;">${field.label}:</span>
 				    				<span style="text-transform:none;margin-right10px;">${field.price !== undefined && field.price !== '' ? `+$${field.price}` : ``}</span>
 						    	</div>
-						    	<input placeholder="${field.label}" type=${field.type} style="width:auto;margin:0 20px;padding: 10px;max-height: 40px;font-size: 18px;border-radius: 5px;">
+						    	<input class="customizationField__input" placeholder="${field.label}" type=${field.type} style="width: calc(90% - 20px);margin:auto;padding: 10px;max-height: 40px;font-size: 18px;border-radius: 5px;">
+						    	`}
 						    </div>
 						`.trim()).join('')}
 				    </div>

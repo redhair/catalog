@@ -46,7 +46,7 @@ select {
 
 footer {
 	text-align: center;
-	color: black;
+	color: var(--secondary);
 	padding: 50px 0;
 	text-transform: capitalize;
 }
@@ -170,6 +170,15 @@ a:active {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+}
+
+.customizationField__input {
+	width: auto;
+    margin: 0 20px;
+    padding: 10px;
+    max-height: 40px
+    font-size: 18px;
+    border-radius: 5px;
 }
 
 .customizationField input {
