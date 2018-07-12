@@ -6,6 +6,7 @@ var Catalog = ((d) => {
 
 	var $pathname = window.location.pathname;
 	var $api = 'http://dashboard.allcountyapparel.com/api';
+	//dev -> "http://dashboard.allcountyapparel.com/api/organizations/wayne-valley-football/all"
 	var $catalogResource = $api + '/organizations' + $pathname + '/all';
 	var $productResource = $api + '/product';
 	var $pdp_container = d.getElementById('pdp_container');
@@ -359,8 +360,7 @@ var Catalog = ((d) => {
 		if (_init)
 			return;
 
-		fetch("http://dashboard.allcountyapparel.com/api/organizations/wayne-valley-football/all")
-		//fetch($catalogResource)
+		fetch($catalogResource)
 			.then((response) => {
 				if (!response.ok) {
 		            throw Error(response.statusText);
